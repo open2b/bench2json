@@ -24,12 +24,12 @@ func main() {
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "bench2json returns a json encoded representation of the benchmark data passed by command line\n"+
 			"Benhmark names are expected to respect the following format:\n"+
-			"Benchmark[INTERPRETER NAME]/[PROGRAM NAME].[FILE EXTENSION]-[PROC NUM]\n" +
+			"Benchmark[INTERPRETER NAME]/[PROGRAM NAME].[FILE EXTENSION]-[PROC NUM]\n"+
 			"the benchmarks are expected to be run with the -test.benchmem option\n")
 		flag.VisitAll(func(f *flag.Flag) {
 			fmt.Fprintf(os.Stderr, " -%s %s\n", f.Name, f.Usage)
 		})
-		fmt.Fprintf(os.Stderr,"\nUsage example: $ go test -bench=. -test.benchmem | bench2json\n")
+		fmt.Fprintf(os.Stderr, "\nUsage example: $ go test -bench=. -test.benchmem | bench2json\n")
 	}
 
 	flag.Parse()
@@ -38,21 +38,22 @@ func main() {
 		flag.Usage()
 		os.Exit(0)
 	}
-	intrerpreters := strings.Split(i, ",")
-	for _, i := range intrerpreters {
-		i = strings.ToLower(i)
-		switch i {
-		case "golua":
-			i = "go-lua"
-		case "gopherlua":
-			i = "gopher-lua"
+	var interpreters []string
+	if i != "" {
+		interpreters = strings.Split(i, ",")
+		for i, interp := range interpreters {
+			interpreters[i] = strings.ToLower(interp)
+			switch interpreters[i] {
+			case "golua":
+				interpreters[i] = "go-lua"
+			case "gopherlua":
+				interpreters[i] = "gopher-lua"
+			}
 		}
 	}
 
-	fmt.Printf("%v\n", intrerpreters)
-
 	res := encodeBenchmarkData(os.Stdin, options{
-		Interpreters: intrerpreters,
+		Interpreters: interpreters,
 		Program:      p,
 	})
 	fmt.Println(res)
