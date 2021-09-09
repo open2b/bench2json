@@ -1,8 +1,8 @@
 # bench2json
 
-bench2json outputs a json encoded representation of the benchmark data passed by command line.
+bench2json is a tool to transform the output of go benchmarks to a json ready to be embedded on the scriggo site.
 
-Benhmark names are expected to respect the following format:
+Benchmark names are expected to respect the following format:
 
 Benchmark[INTERPRETER NAME]/[PROGRAM NAME].[FILE EXTENSION]-[PROC NUM]
 
