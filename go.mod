@@ -1,4 +1,4 @@
-module bench2json
+module github.com/open2b/bench2json
 
 go 1.16
 
