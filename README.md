@@ -1,17 +1,17 @@
 # bench2json
 
-bench2json is a tool to transform the output of go benchmarks to a json ready to be embedded on the scriggo site.
+bench2json is a tool to transform the output of Go benchmarks to a JSON ready to be embedded on the scriggo.com site.
 
 Benchmark names are expected to respect the following format:
 
 Benchmark[INTERPRETER NAME]/[PROGRAM NAME].[FILE EXTENSION]-[PROC NUM]
 
-the benchmarks are expected to be run with the -test.benchmem option.
+the benchmarks are expected to be run with the `-test.benchmem` option.
 
 ### Installation
 
 ```shell
-go install github.com/open2b/bench2json
+$ go install github.com/open2b/bench2json
 ```
 
 ### Usage
@@ -23,6 +23,6 @@ go install github.com/open2b/bench2json
 
 **Usage example**: 
 
-```
-go test -bench=. -test.benchmem | bench2json
+```shell
+$ go test -bench=. -test.benchmem | bench2json
 ```
